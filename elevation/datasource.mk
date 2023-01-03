@@ -15,7 +15,7 @@ $(PRODUCT).vrt: $(shell find cache -size +0 -name "*.tif" 2>/dev/null)
 
 spool/%$(COMPRESSED_EXT):
 	@mkdir -p $(dir $@)
-	curl -s -o $@.temp $(DATASOURCE_URL)/$*$(COMPRESSED_EXT) && mv $@.temp $@
+	curl -k -s -o $@.temp $(DATASOURCE_URL)/$*$(COMPRESSED_EXT) && mv $@.temp $@
 
 spool/%$(TILE_EXT): spool/%$(COMPRESSED_PRE_EXT).zip
 	unzip -qq -d spool $< $*$(TILE_EXT) $(STDERR_SWITCH) || touch $@
